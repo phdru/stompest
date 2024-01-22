@@ -1,4 +1,7 @@
-import collections
+try:
+    from collections.abc import MutableMapping
+except ImportError:
+    from collections import MutableMapping
 import contextlib
 
 from twisted.internet import defer, reactor
@@ -9,7 +12,7 @@ from stompest.util import cloneFrame
 
 MESSAGE_FAILED_HEADER = 'message-failed'
 
-class InFlightOperations(collections.MutableMapping):
+class InFlightOperations(MutableMapping):
     def __init__(self, info):
         self._info = info
         self._waiting = {}
